@@ -1,8 +1,9 @@
-// This is your test publishable API key.
-const stripe = Stripe("pk_test_FsY5f6ygsUKkJo5FHZZ8PZ3C");
 
-// The items the customer wants to buy
-const items = [{ id: "xl-tshirt" }];
+const publicKey = '';
+
+const stripe = Stripe(publicKey, {
+  apiVersion: '2023-10-16'
+});
 
 let elements;
 
@@ -18,7 +19,7 @@ async function initialize() {
   const response = await fetch("/create-payment-intent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
   });
   const { clientSecret } = await response.json();
 
